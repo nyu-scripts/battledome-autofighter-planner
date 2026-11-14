@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Battledome Autofighter Planner</title>
+    <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+    <link rel="icon" href="img/icon.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Battledome Autofighter Planner</h1>
+            <p>Tell the Autofighter exactly what to use on each turn, without fiddling with the turn numbers yourself.</p>
+            <nav class="steps" id="stepNav" aria-label="Steps">
+                <button type="button" data-step="1"><span>1 · Load up<small>Bring in the settings file from the Autofighter</small></span></button>
+                <button type="button" data-step="2" disabled><span>2 · Plan the fight!<small>Change what the Autofighter uses on each round</small></span></button>
+                <button type="button" data-step="3" disabled><span>3 · Get settings<small>Upload the new file to the Autofighter</small></span></button>
+            </nav>
+        </header>
+
+        <section class="card" id="loadSection" data-step="1">
+            <div class="toolbar-help">
+                <span class="toolbar-shot click-download"><img src="img/toolbar.png" alt="Autofighter toolbar: Download, Upload and Delete icons, Download marked" width="158" height="53"><span class="click-ring" aria-hidden="true"></span></span>
+                <p>In the Battledome, click <b>Download</b> on the Autofighter's toolbar. You get a file called <code>battledome.settings.json</code>.</p>
+            </div>
+            <label id="dropZone" for="settingsFile">
+                <b>Drop that file here</b> <span>or click to choose it</span>
+                <input type="file" id="settingsFile" accept=".json,application/json" hidden>
+            </label>
+            <p id="loadError" class="error" hidden></p>
+            <div id="sharedNotice"></div>
+            <details class="paste">
+                <summary>Or paste the text instead</summary>
+                <textarea id="settingsText" rows="4" placeholder='{"SelectedPreset":"Default", ...}'></textarea>
+                <button type="button" id="pasteLoad" class="button secondary">Load</button>
+            </details>
+            <p class="privacy">🔒 Everything stays in your browser, nothing is uploaded anywhere. Since version 3.3.2 the Autofighter leaves your SDB PIN out of this file. If yours is older, the file may include it, so don't share it.</p>
+        </section>
+
+        <section class="card" id="planSection" data-step="2" hidden>
+            <div class="presets">
+                <span class="presets-label" id="presetsLabel">Presets</span>
+                <div id="presetPicker" class="preset-picker" role="radiogroup" aria-labelledby="presetsLabel"></div>
+            </div>
+            <div id="currentWarnings"></div>
+            <div id="sharedPlanNotice"></div>
+            <p class="hint">On the left, what the preset does right now. On the right, your plan: it starts as a copy, so just click a slot to change it. The two weapons can go in any order, and the last round repeats once your list runs out.</p>
+            <div id="planStrips"></div>
+            <div class="row">
+                <button type="button" id="resetPlan" class="button secondary">Undo my changes</button>
+            </div>
+            <label class="check"><input type="checkbox" id="keepBackups" checked> Keep my other weapons and abilities as spares, in case one runs out</label>
+            <p class="hint">Assumes every weapon in the preset is equipped to the pet that fights. Weapons and abilities that are used up (once per battle, single use) or cooling down are skipped, like the Autofighter does. Weapons that "may break" break at random, so they always show as usable. Smart healing isn't shown.</p>
+            <div class="step-nav">
+                <button type="button" class="ko-btn back" data-go="1" title="Back to loading your settings"><span>Back</span></button>
+                <div class="step-dots" aria-label="Step 2 of 3"><i></i><i class="on"></i><i></i><span>Step 2 of 3</span></div>
+                <button type="button" class="ko-btn go" data-go="3"><span>Ready?<small>get my new settings</small></span></button>
+            </div>
+        </section>
+
+        <section class="card" id="resultSection" data-step="3" hidden>
+            <div id="resultProblems"></div>
+            <div class="download-row">
+                <button type="button" id="download" class="button big download-button"><svg class="download-icon" viewBox="0 0 24 24" aria-hidden="true"><g class="download-arrow"><path d="M12 3v11"/><path d="M7 10l5 5 5-5"/></g><path class="download-check" d="M6 13l4 4 8-9"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>Download new settings</span></button>
+                <p id="downloadInfo" class="hint" hidden></p>
+                <div class="copy-row">
+                    <button type="button" id="copyJson" class="button secondary">Copy as text</button>
+                    <button type="button" id="shareLink" class="button secondary">🔗 Copy share link</button>
+                </div>
+            </div>
+            <p id="shareInfo" class="hint" hidden></p>
+            <div class="toolbar-help">
+                <span class="toolbar-shot click-upload"><img src="img/toolbar.png" alt="Autofighter toolbar: Download, Upload and Delete icons, Upload marked" width="158" height="53"><span class="click-ring" aria-hidden="true"></span></span>
+                <p>Back in the Battledome, click <b>Upload</b> on the Autofighter's toolbar and pick the file you just downloaded. Only this preset changes, the rest of your settings stay the same.</p>
+            </div>
+            <details>
+                <summary>Show the rows, if you'd rather type them in yourself</summary>
+                <div id="resultRows" class="table-wrap"></div>
+                <p class="hint">Reload refreshes the page after that weapon is used. Only weapons that change form need it (like Hubrid's Puzzle Box), for anything else it just slows things down.</p>
+            </details>
+            <details>
+                <summary>Show what it will do turn by turn</summary>
+                <div id="resultTable" class="table-wrap"></div>
+            </details>
+            <div class="step-nav">
+                <button type="button" class="ko-btn back" data-go="2" title="Back to the plan"><span>Back</span></button>
+                <div class="step-dots" aria-label="Step 3 of 3"><i></i><i></i><i class="on"></i><span>Step 3 of 3</span></div>
+                <span class="ko-spacer"></span>
+            </div>
+        </section>
+        <footer class="credits">Weapon and ability pictures by Neopets.</footer>
+    </main>
+    <script src="js/abilities.js"></script>
+    <script src="js/weapons.js"></script>
+    <script src="js/planner.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
