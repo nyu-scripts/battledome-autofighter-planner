@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shared Battledome Plan</title>
+    <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+    <link rel="icon" href="img/icon.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&display=swap">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Shared Battledome Plan</h1>
+            <p>Someone shared what the Autofighter should use on each round. Grab it as a settings file and upload it, no need to load yours first.</p>
+        </header>
+
+        <section class="card" id="sharedSection" hidden>
+            <div id="sharedRounds" class="shared-rounds"></div>
+            <div id="sharedProblems"></div>
+
+            <div class="presets">
+                <span class="presets-label" id="presetsLabel">Save it into</span>
+                <div id="presetPicker" class="preset-picker" role="radiogroup" aria-labelledby="presetsLabel"></div>
+            </div>
+
+            <div class="download-row">
+                <button type="button" id="download" class="button big download-button"><svg class="download-icon" viewBox="0 0 24 24" aria-hidden="true"><g class="download-arrow"><path d="M12 3v11"/><path d="M7 10l5 5 5-5"/></g><path class="download-check" d="M6 13l4 4 8-9"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span>Download settings</span></button>
+                <p id="downloadInfo" class="hint" hidden></p>
+                <div class="copy-row">
+                    <button type="button" id="copyJson" class="button secondary">Copy as text</button>
+                    <a id="openPlanner" class="button secondary" href="index.html">✏️ Open in the planner</a>
+                </div>
+            </div>
+            <div class="toolbar-help">
+                <span class="toolbar-shot click-upload"><img src="img/toolbar.png" alt="Autofighter toolbar: Download, Upload and Delete icons, Upload marked" width="158" height="53"><span class="click-ring" aria-hidden="true"></span></span>
+                <p>In the Battledome, click <b>Upload</b> on the Autofighter's toolbar and pick the file you just downloaded. Only the preset you chose changes, the rest of your settings stay the same.</p>
+            </div>
+            <p class="hint">Want to change something, or keep your own weapons and abilities as spares in case one runs out? Open it in the planner and load your settings there.</p>
+        </section>
+
+        <section class="card" id="missingSection" hidden>
+            <p>This link has no plan in it. Maybe it got cut off when it was copied?</p>
+            <a class="button" href="index.html">Go to the planner</a>
+        </section>
+
+        <footer class="credits">Weapon and ability pictures by Neopets.</footer>
+    </main>
+    <script src="js/abilities.js"></script>
+    <script src="js/weapons.js"></script>
+    <script src="js/planner.js"></script>
+    <script src="js/shared.js"></script>
+</body>
+</html>

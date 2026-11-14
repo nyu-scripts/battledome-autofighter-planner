@@ -334,3 +334,7 @@ button.slot:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px
 .copy-row .button { font-size: 13px; padding: 5px 12px; }
 #shareInfo, #downloadInfo { text-align: center; }
 #downloadInfo { margin: 0; }
+
+/* Shared plan page: the round cards stacked, read-only */
+.shared-rounds { display: grid; gap: 26px; margin: 18px 0; }
+a.button { display: inline-block; text-decoration: none; }

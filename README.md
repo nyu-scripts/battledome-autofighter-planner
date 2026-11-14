@@ -9,6 +9,8 @@ A static page that helps set up presets for the Battledome Autofighter userscrip
 
 Everything runs in the browser, no settings leave the page.
 
+Share links (`plan.html#plan=...`) open a page that shows the plan round by round and downloads it as a settings file holding only the chosen preset, so whoever opens it doesn't need to load theirs. Older `index.html#plan=...` links forward there; its "Open in the planner" button adds `&edit=1` to stay in the full planner.
+
 ## Development
 
 No build step. Open `index.html`, or serve the folder with any static server. Tests: `node test/planner.test.js`.

@@ -2,6 +2,12 @@
     'use strict'
     const { presetIds, rowCount, presetLabel, readPreset, writePreset, simulate, lastConfiguredTurn, sameWeapons, buildPreset, planFromPreset, nameWarnings, unknownNameWarnings, encodePlan, decodePlan } = window.planner
 
+    // Shared links open the download page; "Open in the planner" there adds edit=1 to stay here
+    if (/^#plan=/.test(location.hash) && !/&edit=1(&|$)/.test(location.hash)) {
+        location.replace('plan.html' + location.hash)
+        return
+    }
+
     const weaponUsage = name => (window.weaponInfo(name) || {}).usage || ''
     const rules = { ability: window.abilityInfo, weaponUsage }
     const state = { settings: null, presetId: 'Default', plan: null, reloads: {}, output: null, statusCells: [], planFields: [] }
@@ -222,13 +228,13 @@
 
     byId('shareLink').addEventListener('click', async () => {
         const button = byId('shareLink')
-        const link = location.href.split('#')[0] + '#' + encodePlan(state.plan, state.reloads, catalog)
+        const link = new URL('plan.html', location.href).href + '#' + encodePlan(state.plan, state.reloads, catalog)
         const info = byId('shareInfo')
         info.hidden = false
         try {
             await navigator.clipboard.writeText(link)
             button.textContent = 'Link copied!'
-            info.textContent = 'Only the plan goes in the link, nothing else from your settings. Whoever opens it loads their own settings file to use it.'
+            info.textContent = 'Only the plan goes in the link, nothing else from your settings. Whoever opens it can download it straight away, or open it here to mix it with their own settings.'
         } catch (e) {
             info.textContent = "Couldn't copy it, here's the link: " + link
         }
