@@ -2,10 +2,10 @@
 
 A static page that helps set up presets for the Battledome Autofighter userscript (available on [clraik.com](https://clraik.com)) turn by turn.
 
-1. Load the `battledome.settings.json` that the Autofighter downloads (Download icon in the Battledome).
+1. Load the `battledome.settings.json` that the Autofighter downloads (Download icon in the Battledome), or paste what its Copy icon copies.
 2. Pick a preset and see what the bot does with it on each turn.
 3. Write the weapons and ability you want per turn, plus what to use on every other turn.
-4. Download the new settings and load them back with the Autofighter's Upload icon. Only the chosen preset changes.
+4. Download the new settings (or copy them as text) and load them back with the Autofighter's Upload icon (or Paste, for the text). Only the chosen preset changes.
 
 Everything runs in the browser, no settings leave the page.
 

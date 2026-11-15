@@ -26,8 +26,8 @@
 
         <section class="card" id="loadSection" data-step="1">
             <div class="toolbar-help">
-                <span class="toolbar-shot click-download"><img src="img/toolbar.png" alt="Autofighter toolbar: Download, Upload and Delete icons, Download marked" width="158" height="53"><span class="click-ring" aria-hidden="true"></span></span>
-                <p>In the Battledome, click <b>Download</b> on the Autofighter's toolbar. You get a file called <code>battledome.settings.json</code>.</p>
+                <span class="toolbar-shot click-download"><img src="img/toolbar.png" alt="Autofighter toolbar: Download, Upload, Copy, Paste, Planner and Log icons, Download marked" width="316" height="53"><span class="click-ring" aria-hidden="true"></span></span>
+                <p>In the Battledome, click <b>Download</b> on the Autofighter's toolbar. You get a file called <code>battledome.settings.json</code>. Or click <b>Copy</b> (version 3.3.3 and up) and paste the text below.</p>
             </div>
             <label id="dropZone" for="settingsFile">
                 <b>Drop that file here</b> <span>or click to choose it</span>
@@ -36,7 +36,7 @@
             <p id="loadError" class="error" hidden></p>
             <div id="sharedNotice"></div>
             <details class="paste">
-                <summary>Or paste the text instead</summary>
+                <summary>Or paste the copied text instead</summary>
                 <textarea id="settingsText" rows="4" placeholder='{"SelectedPreset":"Default", ...}'></textarea>
                 <button type="button" id="pasteLoad" class="button secondary">Load</button>
             </details>
@@ -76,8 +76,8 @@
             </div>
             <p id="shareInfo" class="hint" hidden></p>
             <div class="toolbar-help">
-                <span class="toolbar-shot click-upload"><img src="img/toolbar.png" alt="Autofighter toolbar: Download, Upload and Delete icons, Upload marked" width="158" height="53"><span class="click-ring" aria-hidden="true"></span></span>
-                <p>Back in the Battledome, click <b>Upload</b> on the Autofighter's toolbar and pick the file you just downloaded. Only this preset changes, the rest of your settings stay the same.</p>
+                <span class="toolbar-shot click-upload"><img src="img/toolbar.png" alt="Autofighter toolbar: Download, Upload, Copy, Paste, Planner and Log icons, Upload marked" width="316" height="53"><span class="click-ring" aria-hidden="true"></span></span>
+                <p>Back in the Battledome, click <b>Upload</b> on the Autofighter's toolbar and pick the file you just downloaded. If you used Copy as text, click <b>Paste</b> instead (version 3.3.3 and up). Only this preset changes, the rest of your settings stay the same.</p>
             </div>
             <details>
                 <summary>Show the rows, if you'd rather type them in yourself</summary>
